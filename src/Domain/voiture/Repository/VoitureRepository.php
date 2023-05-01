@@ -84,13 +84,51 @@ class VoitureRepository
      */
     public function selectAllVoitures(){
         $sql = "SELECT marque, model, annee, couleur FROM voitures";
-
+        $result = false;
         $stmt = $this->connection->prepare($sql);
         if($stmt){
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
         }
+        return $result;
+    }
+
+    /**
+     * Insert nouveau user
+     */
+    public function AjoutUser(string $nom,string $prenom,string $code){
+        $sql = "INSERT INTO user (nom, prenom, code) VALUES (:nom, :prenom, :code)";
+
+        $result = false;
+        $stmt = $this->connection->prepare($sql);
+        if($stmt){
+            $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+            $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = true;
+        }
+        return $result;
+    }
+
+    /**
+     * change la clé d'Api du user
+     *
+     * @return Bool
+     */
+    public function modifApi(int $userId, string $code){
+        $sql = "UPDATE user SET api = :api WHERE id = :id AND code = :code";
+        $result = false;
+        $api = bin2hex(random_bytes(32));
+        $stmt = $this->connection->prepare($sql);
+        if($stmt){
+            $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+            $stmt->bindParam(':api', $api, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = true;
+        }
+        return $result;
     }
 }
 

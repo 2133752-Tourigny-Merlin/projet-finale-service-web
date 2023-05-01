@@ -29,14 +29,14 @@ final class UserPost
      *
      * @return array true ou false si la voiture a été supprimer
      */
-    public function DeleteVoiture(Int $voitureId): array
+    public function ajouterUser(string $nom, string $prenom, string $code): array
     {
 
-        $voitures = $this->repository->DeleteVoiture($voitureId);
+        $user = $this->repository->AjoutUser($nom, $prenom, $code);
 
         // Tableau qui contient la réponse à retourner à l'usager
         $resultat = [
-            "voitureSupprimer" => $voitures
+            "User" => $user
         ];
 
         return $resultat;

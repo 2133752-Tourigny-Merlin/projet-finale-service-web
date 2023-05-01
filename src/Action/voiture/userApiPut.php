@@ -2,17 +2,17 @@
 
 namespace App\Action\voiture;
 
-use App\Domain\voiture\Service\VoitureDelete;
+use App\Domain\voiture\Service\ApiPut;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class VoitureDeleteAction
+final class userApiPut
 {
-    private $voitureDelete;
+    private $apiPut;
 
-    public function __construct(VoitureDelete $voitureDelete)
+    public function __construct(ApiPut $apiPut)
     {
-        $this->voitureDelete = $voitureDelete;
+        $this->apiPut = $apiPut;
     }
 
     public function __invoke(
@@ -21,9 +21,10 @@ final class VoitureDeleteAction
     ): ResponseInterface {
 
         // Récupération des parametres
-        $voitureId = $request->getAttribute('id');
+        $userId = $request->getAttribute('id');
+        $code = $request->getAttribute('code');
 
-        $resultat = $this->voitureDelete->DeleteVoiture($voitureId);
+        $resultat = $this->apiPut->ApiPut($userId, $code);
 
         // Construit la réponse HTTP
         $response->getBody()->write((string)json_encode($resultat));

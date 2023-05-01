@@ -7,7 +7,7 @@ use App\Domain\voiture\Repository\VoitureRepository;
 /**
  * Service.
  */
-final class VoitureDelete
+final class ApiPut
 {
     /**
      * @var VoitureRepository
@@ -29,10 +29,10 @@ final class VoitureDelete
      *
      * @return array true ou false si la voiture a été supprimer
      */
-    public function DeleteVoiture(Int $voitureId): array
+    public function ApiPut(Int $userId, string $code): array
     {
 
-        $voitures = $this->repository->DeleteVoiture($voitureId);
+        $voitures = $this->repository->modifApi($userId, $code);
 
         // Tableau qui contient la réponse à retourner à l'usager
         $resultat = [

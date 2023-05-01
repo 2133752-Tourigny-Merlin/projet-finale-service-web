@@ -2,17 +2,17 @@
 
 namespace App\Action\voiture;
 
-use App\Domain\voiture\Service\VoitureDelete;
+use App\Domain\voiture\Service\UserPost;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class VoitureDeleteAction
+final class userPostAction
 {
-    private $voitureDelete;
+    private $ajoutUser;
 
-    public function __construct(VoitureDelete $voitureDelete)
+    public function __construct(UserPost $ajoutUser)
     {
-        $this->voitureDelete = $voitureDelete;
+        $this->ajoutUser = $ajoutUser;
     }
 
     public function __invoke(
@@ -21,9 +21,11 @@ final class VoitureDeleteAction
     ): ResponseInterface {
 
         // Récupération des parametres
-        $voitureId = $request->getAttribute('id');
+        $nom = $request->getAttribute('nom');
+        $prenom = $request->getAttribute('prenom');
+        $code = $request->getAttribute('code');
 
-        $resultat = $this->voitureDelete->DeleteVoiture($voitureId);
+        $resultat = $this->ajoutUser->ajouterUser($nom, $prenom, $code);
 
         // Construit la réponse HTTP
         $response->getBody()->write((string)json_encode($resultat));
