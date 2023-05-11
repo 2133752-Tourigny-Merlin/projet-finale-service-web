@@ -29,7 +29,7 @@ final class VoiturePut
      *
      * @return array La liste des films
      */
-    public function updateCouleurVoiture(int $voitureId, string $couleur): array
+    public function updateCouleurVoiture(string $voitureId, string $couleur): array
     {
 
         $voitures = $this->repository->updateCouleurVoiture($voitureId, $couleur);

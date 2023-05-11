@@ -3,8 +3,8 @@ info:
   version: 1.0.0
   title: Base-Slim-Skeleton
   description: Structure de base d'un api créé dans le cadre du cours Services Web H2023
-  
-servers: 
+
+servers:
   - url: http://localhost/base-slim-skeleton
 paths:
   /:
@@ -13,8 +13,8 @@ paths:
         - Général
       summary: Message de bienvenue
       responses:
-        '200': 
-          description: 
+        '200':
+          description: Un petit message de bienvenue
           content:
             application/json:
               schema:
@@ -26,11 +26,122 @@ paths:
                     type: string
                 example:
                     success: true
-                    message : 'Hello world!'
-  
+                    message : 'Services Web H2023 - projet Finale'
+  /voiture:
+    get:
+      tags:
+        - Voiture
+      summary: Affiche la liste de tous les voitures
+
+      responses:
+        '200':
+          description: Un tableau de tous les voitures
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example: [ 3, Honda, Civic, 1989, Fer ]
+
+    post:
+      tags:
+        - Voiture
+      summary: Insere une voiture
+      parameters:
+        - in: query
+          name: marque
+          schema:
+            type: string
+            example: Honda
+          required: true
+          description: La marque de la voiture ajouter
+        - in: query
+          name: model
+          schema:
+            type: string
+            example: Civic
+          required: true
+          description: Le model de la voiture
+        - in: query
+          name: annee
+          schema:
+            type: integer
+            example: 1989
+          required: true
+          description: L'année de conception de la voiture
+        - in: query
+          name: couleur
+          schema:
+            type: string
+            example: Vert
+          required: true
+          description: La couleur de la voiture
+      responses:
+        '200':
+          description: Insere une voiture avec les informations que l'usager a entrer en parametre
+          content:
+            application/json:
+              schema:
+                type: boolean
+                items:
+                  type: string
+                example: true
+    put:
+      tags:
+        - Voiture
+      summary: Modifie la couleur d'une voiture
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+            example: 1
+          required: true
+          description: L'id de la voiture pour changer sa couleur
+        - in: query
+          name: couleur
+          schema:
+            type: string
+            example: Bleu
+          required: true
+          description: La nouvel couleur de la voiture
+      responses:
+        '200':
+          description: Modifie la couleur de la voiture ayant l'id passé en parametre
+          content:
+            application/json:
+              schema:
+                type: boolean
+                items:
+                  type: string
+                example: true
+    delete:
+      tags:
+        - Voiture
+      summary: Delete une voiture
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+            example: 1
+          required: true
+          description: L'id de la voiture a supprimer
+      responses:
+        '200':
+          description: Delete la voiture ayant l'id passé en parametre
+          content:
+            application/json:
+              schema:
+                type: boolean
+                items:
+                  type: string
+                example: true
+
   /users:
     post:
-      tags: 
+      tags:
         - Usagers
       summary: Création d'un usager.
       requestBody:
@@ -55,7 +166,7 @@ paths:
                 last_name: 'Fréchette'
                 email: 'frechette.mathieu@cegepvicto.ca'
       responses:
-        '201': 
+        '201':
           description: Le id de l'usager créé
           content:
             application/json:
@@ -66,4 +177,40 @@ paths:
                     type: integer
                 example:
                   id : 1
-  
+  /user:
+    put:
+      tags:
+        - User
+      summary: Modifier la cle d'api de l'usager
+      parameters:
+        - in: query
+          name: nom
+          schema:
+            type: string
+            example: Merlin
+          required: true
+          description: Le nom de l'usager
+        - in: query
+          name: mdp
+          schema:
+            type: string
+            example: qwerty1234
+          required: true
+          description: Le mot de passe de l'usager
+        - in: query
+          name: afficher
+          schema:
+            type: integer
+            example: 1
+          required: true
+          description: si 1, la cle est afficher a l'écran sinon elle reste caché
+      responses:
+        '200':
+          description: la cle api de l'usager s'il veut l'afficher
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  type: string
+                example: des7cu12h387cxisja81idwuqn9d78h12idi12oid71gioux18i9uwx98

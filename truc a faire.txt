@@ -1,0 +1,9 @@
+Service web
+1. installation middleware -fait
+2. documentation -fait
+3. encodage du mot de passe. -fait 
+4. bearer_token -fait
+
+React
+1. seconde api -fait
+2. afficher api lors modif cle api -fait

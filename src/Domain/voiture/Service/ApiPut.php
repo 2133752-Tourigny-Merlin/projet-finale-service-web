@@ -27,16 +27,16 @@ final class ApiPut
     /**
      * Supprime une voiture selon son Id
      *
-     * @return array true ou false si la voiture a été supprimer
+     * @return string
      */
-    public function ApiPut(Int $userId, string $code): array
+    public function ApiPut(String $nom, string $code, int $afficher): array
     {
 
-        $voitures = $this->repository->modifApi($userId, $code);
+        $Api = $this->repository->modifApi($nom, $code, $afficher);
 
         // Tableau qui contient la réponse à retourner à l'usager
         $resultat = [
-            "voitureSupprimer" => $voitures
+            "modifApi" => $Api
         ];
 
         return $resultat;

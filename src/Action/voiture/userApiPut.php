@@ -21,10 +21,11 @@ final class userApiPut
     ): ResponseInterface {
 
         // Récupération des parametres
-        $userId = $request->getAttribute('id');
+        $nom = $request->getAttribute('nom');
         $code = $request->getAttribute('code');
+        $afficher = $request->getAttribute('afficher');
 
-        $resultat = $this->apiPut->ApiPut($userId, $code);
+        $resultat = $this->apiPut->ApiPut($nom, $code, $afficher);
 
         // Construit la réponse HTTP
         $response->getBody()->write((string)json_encode($resultat));

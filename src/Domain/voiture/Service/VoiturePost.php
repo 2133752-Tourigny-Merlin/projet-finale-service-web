@@ -29,7 +29,7 @@ final class VoiturePost
      *
      * @return array true ou false si l'insert a fonctionné
      */
-    public function AjoutVoiture(string $marque, string $model, int $annee, string $couleur): array
+    public function AjoutVoiture(string $marque, string $model, string $annee, string $couleur): array
     {
 
         $voitures = $this->repository->insertVoiture($marque, $model, $annee, $couleur);

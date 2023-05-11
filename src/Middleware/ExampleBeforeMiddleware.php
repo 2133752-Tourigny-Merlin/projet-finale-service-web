@@ -1,30 +1,49 @@
 <?php
-// Source : https://www.slimframework.com/docs/v4/concepts/middleware.html
-
 namespace App\Middleware;
-
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
+// Classe repository où je traite avec la BD
+use App\Domain\voiture\Repository\VoitureRepository;
 
 class ExampleBeforeMiddleware
 {
+
+    private $repository;
+
+    public function __construct(VoitureRepository $cleRepository)
+    {
+        $this->repository = $cleRepository;
+    }
+
     /**
-     * Example middleware invokable class
+     * Validation d'une clé api
      *
-     * @param  ServerRequest  $request PSR-7 request
+     * @param  ServerRequestInterface  $request PSR-7 request
      * @param  RequestHandler $handler PSR-15 request handler
      *
      * @return Response
      */
-    public function __invoke(Request $request, RequestHandler $handler): Response
+    public function __invoke(ServerRequestInterface $request, RequestHandler $handler): Response
     {
-        $response = $handler->handle($request);
-        $existingContent = (string) $response->getBody();
+        // Je récupère la clé ajouté dans l'entête de la requête Sous la forme
+        // Authorization : api_key voiciMaCle
+        $apiKey = explode(' ', $request->getHeaderLine('Authorization'))[1] ?? '';
 
-        $response = new Response();
-        $response->getBody()->write('Voici la réponse -> ' . $existingContent);
-    
-        return $response;
+        // Faire un fonction qui va aller vérifier dans la base de données si la clé existe
+        $reussi = $this->repository->selectCleApi($apiKey);
+
+        // dans mon code la fonction est dans la classe repository ()
+        if($reussi == false) {
+            // On retourne un message d'erreur, la requète ne sera pas exécuter
+            $response = new Response();
+            $response->getBody()->write(json_encode(["erreur" => "La clé est invalide. Accès non autorisé"]));
+
+            return $response
+                ->withStatus(403)
+                ->withHeader('Content-Type', 'application/json');
+        }
+        // la ligne suivante permet de lancer la requète
+        return $handler->handle($request);
     }
 }
