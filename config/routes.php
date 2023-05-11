@@ -27,7 +27,5 @@ return function (App $app) {
         ->add(ExampleBeforeMiddleware::class);
     $app->delete('/voiture/{id}', \App\Action\voiture\VoitureDeleteAction::class)
         ->add(ExampleBeforeMiddleware::class);
-
-
 };
 

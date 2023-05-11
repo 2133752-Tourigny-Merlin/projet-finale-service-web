@@ -111,7 +111,7 @@ class VoitureRepository
             if ($stmt) {
                 $stmt->bindParam(':cle', $api, PDO::PARAM_STR);
                 $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
-                $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+                $stmt->bindParam(':code', $result, PDO::PARAM_STR);
                 $stmt->execute();
             }
 

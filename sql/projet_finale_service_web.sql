@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: May 11, 2023 at 01:02 PM
+-- Generation Time: May 11, 2023 at 01:44 PM
 -- Server version: 10.7.3-MariaDB-1:10.7.3+maria~focal
 -- PHP Version: 8.1.6
 
@@ -39,8 +39,8 @@ CREATE TABLE `usagers` (
 --
 
 INSERT INTO `usagers` (`id`, `nom`, `code`, `cle`) VALUES
-(1, 'Tourigny', '$2y$10$8eJxg/AYTrlsajP.OejgFuUpI6SxqwQXqB0SK9NNLOAV7R8/0Mmoi', '75546dda5cb1107b53f628fa542f854a8f44b3e9559d3a4ff5d35bc06a403328'),
-(2, 'admin', '$2y$10$2fsGaZuD47WueAoT1O7nJ.1XfWwvr7Dqvip5VphEMaxWfnec3ybiW', NULL);
+(1, 'Tourigny', '$2y$10$8eJxg/AYTrlsajP.OejgFuUpI6SxqwQXqB0SK9NNLOAV7R8/0Mmoi', '48c4fc6ca377738ea8f63521d916861b0e9959323aac887068d0d39d4d7a3e43'),
+(2, 'admin', '$2y$10$2fsGaZuD47WueAoT1O7nJ.1XfWwvr7Dqvip5VphEMaxWfnec3ybiW', 'f23a6a8668769a1a74109b108f64d967365e451c6f36fb9b81e71fa376c01ae0');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,6 @@ CREATE TABLE `voitures` (
 INSERT INTO `voitures` (`id`, `marque`, `model`, `annee`, `couleur`) VALUES
 (3, 'Honda', 'Civic', 1989, 'vert'),
 (4, 'Honda', 'Accord', 2008, 'blanc'),
-(5, 'Toyota', 'tarcel', 1983, 'noir rouille'),
 (8, 'Mazda', '3', 2016, 'Bleu'),
 (9, 'Ferrari', 'purosangue', 2023, 'Gris');
 
@@ -97,7 +96,7 @@ ALTER TABLE `usagers`
 -- AUTO_INCREMENT for table `voitures`
 --
 ALTER TABLE `voitures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
